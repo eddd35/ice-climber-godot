@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfotd1ukomtic"]
+
+[ext_resource type="PackedScene" uid="uid://c3e6vhhhmdi34" path="res://terrain/brick.tscn" id="1_754nk"]
+[ext_resource type="PackedScene" uid="uid://drfb35nfhca5v" path="res://terrain/block.tscn" id="1_hrn54"]
+[ext_resource type="PackedScene" uid="uid://bpbbdptcxylem" path="res://terrain/half.tscn" id="2_6qdq5"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_orvr6"]
+resource_name = "bricks"
+scenes/1/scene = ExtResource("1_hrn54")
+scenes/2/scene = ExtResource("1_754nk")
+scenes/3/scene = ExtResource("2_6qdq5")
+
+[sub_resource type="TileSet" id="TileSet_2gneo"]
+tile_size = Vector2i(24, 24)
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 2
+sources/0 = SubResource("TileSetScenesCollectionSource_orvr6")
+
+[node name="Node2D" type="TileMapLayer"]
+tile_set = SubResource("TileSet_2gneo")

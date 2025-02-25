@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=3 uid="uid://bofyf0dtlrxfw"]
+
+[ext_resource type="Script" path="res://items/hammer.gd" id="1_vr4eh"]
+[ext_resource type="Texture2D" uid="uid://c0nponadcc3ys" path="res://sprites/hammer.png" id="2_u27ce"]
+[ext_resource type="Texture2D" uid="uid://ckdw3vkf4obxa" path="res://icon.svg" id="3_visvv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sytqq"]
+size = Vector2(24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibj56"]
+atlas = ExtResource("2_u27ce")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm256"]
+atlas = ExtResource("2_u27ce")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8psj"]
+atlas = ExtResource("2_u27ce")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6er80"]
+atlas = ExtResource("2_u27ce")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5757x"]
+atlas = ExtResource("2_u27ce")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hvokq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibj56")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm256")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8psj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6er80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5757x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5757x")
+}],
+"loop": false,
+"name": &"swing",
+"speed": 10.0
+}]
+
+[node name="hammer" type="Area2D" node_paths=PackedStringArray("sprite", "low", "up", "top_front", "back", "hitbox")]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_vr4eh")
+sprite = NodePath("hammersprite")
+low = NodePath("low")
+up = NodePath("up")
+top_front = NodePath("top_front")
+back = NodePath("back")
+hitbox = NodePath("CollisionShape2D2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sytqq")
+
+[node name="hammersprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hvokq")
+animation = &"jump"
+autoplay = "swing"
+
+[node name="low" type="Marker2D" parent="."]
+position = Vector2(-36, 60)
+gizmo_extents = 12.0
+
+[node name="Icon" type="Sprite2D" parent="low"]
+visible = false
+scale = Vector2(0.188, 0.188)
+texture = ExtResource("3_visvv")
+
+[node name="up" type="Marker2D" parent="."]
+position = Vector2(12, -36)
+gizmo_extents = 12.0
+
+[node name="Icon" type="Sprite2D" parent="up"]
+visible = false
+scale = Vector2(0.188, 0.188)
+texture = ExtResource("3_visvv")
+
+[node name="top_front" type="Marker2D" parent="."]
+position = Vector2(-36, -12)
+gizmo_extents = 12.0
+
+[node name="Icon" type="Sprite2D" parent="top_front"]
+visible = false
+scale = Vector2(0.188, 0.188)
+texture = ExtResource("3_visvv")
+
+[node name="back" type="Marker2D" parent="."]
+position = Vector2(36, 12)
+gizmo_extents = 12.0
+
+[node name="Icon" type="Sprite2D" parent="back"]
+visible = false
+scale = Vector2(0.188, 0.188)
+texture = ExtResource("3_visvv")
+
+[node name="Icon" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.188, 0.188)
+texture = ExtResource("3_visvv")

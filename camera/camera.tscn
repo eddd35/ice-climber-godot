@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmht14lhn4no7"]
+
+[ext_resource type="Script" path="res://camera/camera.gd" id="1_q3rws"]
+[ext_resource type="Texture2D" uid="uid://d2unv2jgj3hup" path="res://levels/Ice Climber (USA, Europe, Korea)_003.bmp" id="2_xnysg"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_d8tq0"]
+[ext_resource type="Script" path="res://camera/advance.gd" id="4_t6273"]
+[ext_resource type="Script" path="res://camera/stop.gd" id="5_08h8g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vupc7"]
+size = Vector2(768, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6f2dl"]
+size = Vector2(2074, 123.5)
+
+[node name="camera" type="Camera2D" node_paths=PackedStringArray("killbox", "advance_box")]
+script = ExtResource("1_q3rws")
+killbox = NodePath("diezone")
+advance_box = NodePath("advance box")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -35
+offset_left = -384.0
+offset_top = -360.0
+offset_right = 384.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="IceClimber(usa,Europe,Korea)003" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 21)
+texture = ExtResource("2_xnysg")
+
+[node name="advance box" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="advance box"]
+position = Vector2(0, -264.5)
+shape = SubResource("RectangleShape2D_vupc7")
+debug_color = Color(0.93314, 2.12738e-05, 0.645882, 0.42)
+
+[node name="diezone" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="diezone"]
+position = Vector2(0, 421.25)
+shape = SubResource("RectangleShape2D_6f2dl")
+
+[node name="State_Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_d8tq0")
+initial_state = NodePath("stop")
+
+[node name="advance" type="Node" parent="State_Machine" node_paths=PackedStringArray("parent")]
+script = ExtResource("4_t6273")
+parent = NodePath("../..")
+
+[node name="stop" type="Node" parent="State_Machine" node_paths=PackedStringArray("parent")]
+script = ExtResource("5_08h8g")
+parent = NodePath("../..")

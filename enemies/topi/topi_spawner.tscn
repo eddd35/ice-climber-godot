@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://vbhjpqtpu2tx"]
+
+[ext_resource type="Script" path="res://enemies/topi/topi_spawner.gd" id="1_xs25l"]
+[ext_resource type="PackedScene" uid="uid://co2g1dtm3juli" path="res://enemies/topi/topi.tscn" id="2_niqd0"]
+
+[node name="topi_spawner" type="Node2D"]
+script = ExtResource("1_xs25l")
+
+[node name="topi" parent="." instance=ExtResource("2_niqd0")]

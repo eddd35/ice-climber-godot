@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bioj757hn7xl4"]
+
+[ext_resource type="PackedScene" uid="uid://dv3xuu8h7c2sc" path="res://endzone/endset.tscn" id="1_myma0"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5culr"]
+scenes/1/scene = ExtResource("1_myma0")
+
+[sub_resource type="TileSet" id="TileSet_lclxb"]
+tile_size = Vector2i(768, 144)
+sources/0 = SubResource("TileSetScenesCollectionSource_5culr")
+
+[node name="endzones" type="TileMapLayer"]
+tile_set = SubResource("TileSet_lclxb")

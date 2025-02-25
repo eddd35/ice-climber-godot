@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://drfb35nfhca5v"]
+
+[ext_resource type="Script" path="res://terrain/block.gd" id="1_ovyt7"]
+[ext_resource type="Texture2D" uid="uid://kacov7wou4b2" path="res://sprites/block.png" id="2_c3ads"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btap7"]
+size = Vector2(24, 24)
+
+[node name="block" type="StaticBody2D" node_paths=PackedStringArray("bounding_box", "sprite")]
+script = ExtResource("1_ovyt7")
+bounding_box = NodePath(".")
+sprite = NodePath("sprite")
+
+[node name="sprite" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_c3ads")
+
+[node name="bounding" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_btap7")
+debug_color = Color(0, 0.619541, 0.569522, 0.42)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0

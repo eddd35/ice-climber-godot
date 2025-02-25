@@ -1,0 +1,198 @@
+[gd_scene load_steps=21 format=3 uid="uid://bku3jji5j4xja"]
+
+[ext_resource type="Script" path="res://endzone/endzone.gd" id="1_lwowu"]
+[ext_resource type="Texture2D" uid="uid://b6nkagmfh0dtj" path="res://sprites/endzones.png" id="2_50xew"]
+[ext_resource type="Texture2D" uid="uid://cg0s5aubmhapl" path="res://sprites/numbers.png" id="3_h3wt5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5qti"]
+atlas = ExtResource("2_50xew")
+region = Rect2(288, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50at3"]
+atlas = ExtResource("2_50xew")
+region = Rect2(144, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cndke"]
+atlas = ExtResource("2_50xew")
+region = Rect2(0, 0, 144, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ir4v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5qti")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50at3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cndke")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yglf2"]
+size = Vector2(144, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5j2cd"]
+size = Vector2(120, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_py8d1"]
+size = Vector2(96, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ki4xk"]
+atlas = ExtResource("3_h3wt5")
+region = Rect2(0, 0, 24, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5263"]
+atlas = ExtResource("3_h3wt5")
+region = Rect2(24, 0, 24, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbk0h"]
+atlas = ExtResource("3_h3wt5")
+region = Rect2(48, 0, 24, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpivt"]
+atlas = ExtResource("3_h3wt5")
+region = Rect2(72, 0, 24, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_085vw"]
+atlas = ExtResource("3_h3wt5")
+region = Rect2(96, 0, 24, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjcvr"]
+atlas = ExtResource("3_h3wt5")
+region = Rect2(120, 0, 24, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue7um"]
+atlas = ExtResource("3_h3wt5")
+region = Rect2(144, 0, 24, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0lu7"]
+atlas = ExtResource("3_h3wt5")
+region = Rect2(168, 0, 24, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yl7k6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ki4xk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5263")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbk0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpivt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_085vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjcvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue7um")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0lu7")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obmnc"]
+size = Vector2(144, 120)
+
+[node name="endzone" type="Node2D" node_paths=PackedStringArray("sprite", "number", "zero_box", "one_box", "two_box", "high_mark", "mid_mark", "low_mark")]
+script = ExtResource("1_lwowu")
+sprite = NodePath("sprite")
+number = NodePath("number")
+zero_box = NodePath("low")
+one_box = NodePath("mid")
+two_box = NodePath("high")
+high_mark = NodePath("high/marker")
+mid_mark = NodePath("mid/marker")
+low_mark = NodePath("low/marker")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_8ir4v")
+frame = 2
+frame_progress = 1.0
+
+[node name="high" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="6" type="CollisionShape2D" parent="high"]
+position = Vector2(0, 60)
+shape = SubResource("RectangleShape2D_yglf2")
+
+[node name="marker" type="Marker2D" parent="high"]
+position = Vector2(-13, 0)
+
+[node name="mid" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="5" type="CollisionShape2D" parent="mid"]
+position = Vector2(12, 60)
+shape = SubResource("RectangleShape2D_5j2cd")
+debug_color = Color(0.307597, 0.627092, 3.85046e-07, 0.42)
+
+[node name="marker" type="Marker2D" parent="mid"]
+position = Vector2(12, 0)
+
+[node name="low" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="4" type="CollisionShape2D" parent="low"]
+position = Vector2(24, 60)
+shape = SubResource("RectangleShape2D_py8d1")
+debug_color = Color(0.927931, 0.268297, 0, 0.42)
+
+[node name="marker" type="Marker2D" parent="low"]
+position = Vector2(36, 0)
+
+[node name="number" type="AnimatedSprite2D" parent="."]
+z_index = 2
+position = Vector2(-12, 0)
+sprite_frames = SubResource("SpriteFrames_yl7k6")
+frame = 8
+frame_progress = 1.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(144, 60)
+shape = SubResource("RectangleShape2D_yglf2")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -12.0
+offset_right = 28.0
+offset_bottom = 23.0
+text = "level, tier : (25,25)"
+
+[node name="return_box" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="return_box"]
+position = Vector2(144, -12)
+shape = SubResource("RectangleShape2D_obmnc")
+
+[node name="Marker2D" type="Marker2D" parent="return_box"]
+position = Vector2(144, -12)

@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3e6vhhhmdi34"]
+
+[ext_resource type="Script" path="res://terrain/brick.gd" id="1_oco3j"]
+[ext_resource type="Texture2D" uid="uid://boih7v77oulig" path="res://sprites/brick.png" id="2_0g0mu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ov5yw"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txsfj"]
+size = Vector2(24, 4)
+
+[node name="fullbrick" type="StaticBody2D" node_paths=PackedStringArray("regenbox", "adjacent", "bounding_box", "sprite")]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_oco3j")
+regenbox = NodePath("regenbox")
+adjacent = NodePath("RayCast2D")
+bounding_box = NodePath(".")
+sprite = NodePath("Brick")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ov5yw")
+debug_color = Color(0.686237, 0.500267, 0, 0.42)
+
+[node name="regenbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="regenbox"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_txsfj")
+
+[node name="Brick" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_0g0mu")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 128
+hit_from_inside = true
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="area_entered" from="regenbox" to="." method="_on_regenbox_area_entered"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv3xuu8h7c2sc"]
+
+[ext_resource type="Script" path="res://endzone/endset.gd" id="1_7t7iu"]
+[ext_resource type="PackedScene" uid="uid://bku3jji5j4xja" path="res://endzone/endzone.tscn" id="2_4idv2"]
+
+[node name="endset" type="Node2D" node_paths=PackedStringArray("left", "right")]
+script = ExtResource("1_7t7iu")
+left = NodePath("left")
+right = NodePath("right")
+
+[node name="left" parent="." instance=ExtResource("2_4idv2")]
+position = Vector2(-312, 0)
+
+[node name="right" parent="." instance=ExtResource("2_4idv2")]
+position = Vector2(312, 0)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0

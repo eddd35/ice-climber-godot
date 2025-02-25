@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=4 uid="uid://boxwpki2wr61"]
+
+[ext_resource type="Script" path="res://levels/level_32.gd" id="1_2arwk"]
+[ext_resource type="Texture2D" uid="uid://curdfxtacfp3j" path="res://levels/mountain 32.png" id="2_k570d"]
+[ext_resource type="PackedScene" uid="uid://cfotd1ukomtic" path="res://terrain/tilemap.tscn" id="3_0i8rr"]
+[ext_resource type="PackedScene" uid="uid://bioj757hn7xl4" path="res://endzone/ends.tscn" id="4_uhvqi"]
+[ext_resource type="PackedScene" uid="uid://djw31tjnh5m17" path="res://player/playerH.tscn" id="5_oj2kd"]
+[ext_resource type="PackedScene" uid="uid://cmht14lhn4no7" path="res://camera/camera.tscn" id="6_pcc3g"]
+
+[node name="level32" type="Node2D" node_paths=PackedStringArray("player", "camera")]
+script = ExtResource("1_2arwk")
+player = NodePath("player")
+camera = NodePath("Node2D")
+
+[node name="Mountain32" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(384, -1296)
+texture = ExtResource("2_k570d")
+
+[node name="bricks" parent="." instance=ExtResource("3_0i8rr")]
+tile_map_data = PackedByteArray("AAAMAPT/AAAAAAAAAQAVAPT/AAAAAAAAAQALAOP/AAAAAAAAAQAVAOP/AAAAAAAAAQAEAP7/AAAAAAAAAgAFAP7/AAAAAAAAAgAGAP7/AAAAAAAAAgAHAP7/AAAAAAAAAgAIAP7/AAAAAAAAAgAJAP7/AAAAAAAAAgAKAP7/AAAAAAAAAgALAP7/AAAAAAAAAgAMAP7/AAAAAAAAAgANAP7/AAAAAAAAAgAOAP7/AAAAAAAAAgAPAP7/AAAAAAAAAgAQAP7/AAAAAAAAAgARAP7/AAAAAAAAAgASAP7/AAAAAAAAAgATAP7/AAAAAAAAAgAUAP7/AAAAAAAAAgAVAP7/AAAAAAAAAgAWAP7/AAAAAAAAAgAXAP7/AAAAAAAAAgAYAP7/AAAAAAAAAgAZAP7/AAAAAAAAAgAaAP7/AAAAAAAAAgAbAP7/AAAAAAAAAgAVAPX/AAAAAAAAAQAMAPX/AAAAAAAAAQA=")
+
+[node name="ends" parent="." instance=ExtResource("4_uhvqi")]
+position = Vector2(0, -24)
+tile_map_data = PackedByteArray("AAAAAPv/AAAAAAAAAQAAAPr/AAAAAAAAAQAAAPn/AAAAAAAAAQAAAPj/AAAAAAAAAQAAAP7/AAAAAAAAAQAAAP3/AAAAAAAAAQAAAPz/AAAAAAAAAQAAAP//AAAAAAAAAQA=")
+
+[node name="player" parent="." instance=ExtResource("5_oj2kd")]
+position = Vector2(409, -125)
+scale = Vector2(1, 1)
+
+[node name="Node2D" parent="." instance=ExtResource("6_pcc3g")]
+visible = false
+position = Vector2(384, -360)

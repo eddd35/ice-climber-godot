@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://co2g1dtm3juli"]
+
+[ext_resource type="Script" path="res://enemies/topi/topi.gd" id="1_e7mj0"]
+[ext_resource type="Texture2D" uid="uid://bwndbdt15jt3p" path="res://sprites/topi.png" id="2_4ysmy"]
+[ext_resource type="Texture2D" uid="uid://boih7v77oulig" path="res://sprites/brick.png" id="3_1ux3l"]
+[ext_resource type="Script" path="res://scripts/state_machine.gd" id="4_d7j6l"]
+[ext_resource type="Script" path="res://enemies/topi/topiWander.gd" id="5_xrmfw"]
+[ext_resource type="Script" path="res://enemies/topi/topiRetreat.gd" id="6_0v64u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lm0e"]
+atlas = ExtResource("2_4ysmy")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqqmi"]
+atlas = ExtResource("2_4ysmy")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btmpu"]
+atlas = ExtResource("2_4ysmy")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1je2"]
+atlas = ExtResource("2_4ysmy")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_af0cj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lm0e")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqqmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btmpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1je2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g3fli"]
+size = Vector2(24, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxggg"]
+size = Vector2(24, 48)
+
+[node name="topi" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "down", "infront") groups=["Topis"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_e7mj0")
+sprite = NodePath("AnimatedSprite2D")
+down = NodePath("RayCast2D")
+infront = NodePath("freeziespot")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_af0cj")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.853154
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g3fli")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 26)
+collision_mask = 18
+hit_from_inside = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 136
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_nxggg")
+debug_color = Color(0, 0.628702, 0.489809, 0.42)
+
+[node name="freeziespot" type="Marker2D" parent="."]
+position = Vector2(-36, 0)
+gizmo_extents = 12.0
+
+[node name="Brick" type="Sprite2D" parent="freeziespot"]
+visible = false
+texture = ExtResource("3_1ux3l")
+
+[node name="state machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_d7j6l")
+initial_state = NodePath("TopiWander")
+
+[node name="TopiWander" type="Node" parent="state machine" node_paths=PackedStringArray("parent")]
+script = ExtResource("5_xrmfw")
+parent = NodePath("../..")
+
+[node name="TopiRetreat" type="Node" parent="state machine" node_paths=PackedStringArray("parent")]
+script = ExtResource("6_0v64u")
+parent = NodePath("../..")
